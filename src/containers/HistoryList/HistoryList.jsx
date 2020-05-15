@@ -1,13 +1,14 @@
 import React from 'react';
-import { useLSHistory } from '../../hooks/AppProvider/AppProvider';
-import { useLoadHistoryItem } from '../../hooks/History/History';
+import { getLSHistory } from '../../selectors/selectors';
+import { useSelector } from 'react-redux';
+// import { useLoadHistoryItem } from '../../hooks/History/History';
 import HistoryItem from '../../components/HistoryItem/HistoryItem';
 import styles from './HistoryList.css';
 
 const HistoryContainer = () => {
 
-  const history = useLSHistory();
-
+  const history = useSelector(getLSHistory);
+  
   const handleClearHistory = () => {
     localStorage.setItem('history', JSON.stringify([]));
   }; 
@@ -18,7 +19,8 @@ const HistoryContainer = () => {
       method={item.method} 
       url={item.url} 
       index={index} 
-      onLoadHistoryItemClick={() => useLoadHistoryItem(index)} 
+      // onLoadHistoryItemClick={() => useLoadHistoryItem(index)} 
+      onLoadHistoryItemClick={() => {}} 
     />);
   
   return (

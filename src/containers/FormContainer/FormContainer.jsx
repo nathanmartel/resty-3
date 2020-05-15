@@ -1,29 +1,23 @@
 import React from 'react';
-import { useDispatch, useUrl, useMethod, useBody, useAuthType, useAuthUsername, useAuthPassword, useAuthToken, useAuthUsernamePlaceholder, useAuthPasswordPlaceholder, useAuthTokenPlaceholder, useLSHistory } from '../../hooks/AppProvider/AppProvider';
+import { useSelector, useDispatch } from 'react-redux';
+import  { getUrl, getMethod, getBody, getAuthType, getAuthUsername, getAuthPassword, getAuthToken } from '../../selectors/selectors';
 import RequestForm from '../../components/RequestForm/RequestForm';
 import styles from './FormContainer.css';
 
 
 const FormContainer = () => {
   
-  // Why doesn't this work???
-  // const { url, method, body, authType, authUsername, authPassword, authToken } = useContext(AppContext);
-  // const { authUsernamePlaceholder, authPasswordPlaceholder, authTokenPlaceholder } = useContext(AppContext);
-  // const { history } = useContext(AppContext);
-  // const { res, loading, error } = useContext(AppContext);
-
-  // ... It seems like this shouldn't be necessary?
-  const url = useUrl();
-  const method = useMethod();
-  const body = useBody();
-  const authType = useAuthType();
-  const authUsername = useAuthUsername();
-  const authPassword = useAuthPassword();
-  const authToken = useAuthToken();
-  const authUsernamePlaceholder = useAuthUsernamePlaceholder();
-  const authPasswordPlaceholder = useAuthPasswordPlaceholder();
-  const authTokenPlaceholder = useAuthTokenPlaceholder();
-  const history = useLSHistory();
+  const url = useSelector(getUrl);
+  const method = useSelector(getMethod);
+  const body = useSelector(getBody);
+  const authType = useSelector(getAuthType);
+  const authUsername = useSelector(getAuthUsername);
+  const authPassword = useSelector(getAuthPassword);
+  const authToken = useSelector(getAuthToken);
+  const authUsernamePlaceholder = 'Username';
+  const authPasswordPlaceholder = 'Password';
+  const authTokenPlaceholder = 'Bearer Token';
+  // const history = useSelector(useLSHistory);
   const dispatch = useDispatch();
   
   const handleUrlChange = ({ target }) => dispatch({ type: 'SET_URL', payload: target.value });
@@ -72,28 +66,28 @@ const FormContainer = () => {
   }
 
   // Create a history item and update request history in localStorage
-  function addFetchToHistory() {
+  // function addFetchToHistory() {
 
-    const newHistoryItem = { 
-      url,
-      method,
-      body,
-      authType,
-      authUsername,
-      authPassword,
-      authToken
-    };
+  //   const newHistoryItem = { 
+  //     url,
+  //     method,
+  //     body,
+  //     authType,
+  //     authUsername,
+  //     authPassword,
+  //     authToken
+  //   };
 
-    console.log('in useAddFetchToHistory');
-    let newHistory;
-    if(history) {
-      newHistory = history;
-      newHistory.push(newHistoryItem);
-      localStorage.setItem('history', JSON.stringify(newHistory));
-    } else {
-      localStorage.setItem('history', JSON.stringify([newHistoryItem]));
-    }
-  }
+  //   console.log('in useAddFetchToHistory');
+  //   let newHistory;
+  //   if(history) {
+  //     newHistory = history;
+  //     newHistory.push(newHistoryItem);
+  //     localStorage.setItem('history', JSON.stringify(newHistory));
+  //   } else {
+  //     localStorage.setItem('history', JSON.stringify([newHistoryItem]));
+  //   }
+  // }
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +96,7 @@ const FormContainer = () => {
     fetchRequest();
     dispatch({ type: 'SET_LOADING', payload: false });
     console.log('submitting!');
-    addFetchToHistory();
+    // addFetchToHistory();
   };
 
 
