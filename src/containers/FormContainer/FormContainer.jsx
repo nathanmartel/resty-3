@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import  { getUrl, getMethod, getBody, getAuthType, getAuthUsername, getAuthPassword, getAuthToken } from '../../selectors/selectors';
 import RequestForm from '../../components/RequestForm/RequestForm';
 import styles from './FormContainer.css';
+import { setUrl, setMethod, setBody, setAuthType, setAuthUsername, setAuthPassword, setAuthToken, setRes, setError } from '../../actions/actions';
 
 
 const FormContainer = () => {
@@ -20,13 +21,13 @@ const FormContainer = () => {
   // const history = useSelector(useLSHistory);
   const dispatch = useDispatch();
   
-  const handleUrlChange = ({ target }) => dispatch({ type: 'SET_URL', payload: target.value });
-  const handleMethodChange = ({ target }) => dispatch({ type: 'SET_METHOD', payload: target.value });
-  const handleBodyChange = ({ target }) => dispatch({ type: 'SET_BODY', payload: target.value });
-  const handleAuthTypeChange = ({ target }) => dispatch({ type: 'SET_AUTHTYPE', payload: target.value });
-  const handleAuthUsernameChange = ({ target }) => dispatch({ type: 'SET_AUTHUSERNAME', payload: target.value });
-  const handleAuthPasswordChange = ({ target }) => dispatch({ type: 'SET_AUTHPASSWORD', payload: target.value });
-  const handleAuthTokenChange = ({ target }) => dispatch({ type: 'SET_AUTHTOKEN', payload: target.value });
+  const handleUrlChange = ({ target }) => dispatch(setUrl(target.value));
+  const handleMethodChange = ({ target }) => dispatch(setMethod(target.value));
+  const handleBodyChange = ({ target }) => dispatch(setBody(target.value));
+  const handleAuthTypeChange = ({ target }) => dispatch(setAuthType(target.value));
+  const handleAuthUsernameChange = ({ target }) => dispatch(setAuthUsername(target.value));
+  const handleAuthPasswordChange = ({ target }) => dispatch(setAuthPassword(target.value));
+  const handleAuthTokenChange = ({ target }) => dispatch(setAuthToken(target.value));
 
   function fetchRequest() {
     console.log('in fetchRequest');
@@ -60,9 +61,9 @@ const FormContainer = () => {
       .then(res => res.json())
       // Make sure response is in array form
       .then(json => Array.isArray(json) 
-        ? dispatch({ type: 'SET_RES', payload: json }) 
-        : dispatch({ type: 'SET_RES', payload: [json] }))
-      .catch(err => dispatch({ type: 'SET_ERROR', payload: err }));
+        ? dispatch(setRes(json)) 
+        : dispatch(setRes([json])))
+      .catch(err => dispatch(setError(err)));
   }
 
   // Create a history item and update request history in localStorage

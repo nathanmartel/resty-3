@@ -9,6 +9,7 @@ const initialState = {
   res: [],
   loading: false,
   error: '',
+  history: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -33,6 +34,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, error: action.payload };
     case 'SET_RES':
       return { ...state, res: action.payload };
+    case 'SET_HISTORY':
+      return { ...state, history: action.payload };
     
     default:
       return state;
