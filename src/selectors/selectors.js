@@ -41,8 +41,3 @@ export const getError = (state) => {
 export const getHistory = (state) => {
   return state.history;
 };
-
-export const getLSHistory = () => {
-  const history = JSON.parse(localStorage.getItem('history'));
-  return history;
-};

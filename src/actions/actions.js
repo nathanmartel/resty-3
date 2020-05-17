@@ -64,7 +64,8 @@ export const setHistory = (history) => ({
   payload: history
 });
 
-export const setLSHistory = () => {
-  const history = JSON.parse(localStorage.getItem('history'));
-  return history;
-};
+export const ADD_HISTORY = 'ADD_HISTORY';
+export const addHistory = (history) => ({
+  type: ADD_HISTORY,
+  payload: history
+});

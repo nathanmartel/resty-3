@@ -20,7 +20,8 @@ const RequestForm = ({
   onAuthUsernameChange, 
   onAuthPasswordChange, 
   onAuthTokenChange, 
-  onSubmit }) => { 
+  onSubmit 
+}) => { 
 
   return (
     <div className="requestContainer">
