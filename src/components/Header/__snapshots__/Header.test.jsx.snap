@@ -3,7 +3,7 @@
 exports[`Header component renders Header 1`] = `
 <header>
   <h1>
-    RESTy
+    RESTy Redux
   </h1>
 </header>
 `;

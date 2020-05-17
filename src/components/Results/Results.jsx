@@ -4,12 +4,7 @@ import PropTypes from 'prop-types';
 
 const Results = ({ item }) => {
   return (
-    <>
-      <ReactJson src={item} name={false} displayDataTypes={false} />);
-      {/* <pre>
-        { JSON.stringify(item) }
-      </pre> */}
-    </>
+    <ReactJson src={item} name={false} displayDataTypes={false} />
   );
 };
 
